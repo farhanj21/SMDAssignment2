@@ -1,10 +1,13 @@
 package com.example.smdassignment3;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,6 +57,47 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);  // Open TaskInputActivity for result (requestCode 1)
             }
         });
+
+        // Add long click listener for deleting tasks in the To-Do list
+        toDoListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showDeleteConfirmationDialog(position, true);
+                return true;
+            }
+        });
+
+        // Add long click listener for deleting tasks in the Completed tasks list
+        completedTasksListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showDeleteConfirmationDialog(position, false);
+                return true;
+            }
+        });
+    }
+
+    // Show a confirmation dialog before deleting a task
+    private void showDeleteConfirmationDialog(final int position, final boolean isToDoTask) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Task")
+                .setMessage("Are you sure you want to delete this task?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (isToDoTask) {
+                            // Remove the task from To-Do List
+                            toDoTaskList.remove(position);
+                            toDoTaskAdapter.notifyDataSetChanged();
+                        } else {
+                            // Remove the task from Completed List
+                            completedTaskList.remove(position);
+                            completedTaskAdapter.notifyDataSetChanged();
+                        }
+                        saveTasks();  // Save updated task list
+                    }
+                })
+                .setNegativeButton("No", null)  // Do nothing on "No"
+                .show();
     }
 
     // Handle results from TaskInputActivity and TaskDetailsActivity

@@ -2,66 +2,55 @@ package com.example.smdassignment3;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-public class TaskDetailsActivity extends AppCompatActivity {
-
-    private EditText taskNameEditText;
-    private EditText taskDescriptionEditText;
-    private Button saveButton;
-    private Button deleteButton;
-    private int taskPosition;
+public class TaskDetailsActivity extends AppCompatActivity implements TaskInputFragment.TaskInputListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
 
-        taskNameEditText = findViewById(R.id.taskNameEditText);
-        taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText);
-        saveButton = findViewById(R.id.saveButton);
-        deleteButton = findViewById(R.id.deleteButton);
-
         // Get task details from intent
         Intent intent = getIntent();
-        if (intent != null) {
-            taskPosition = intent.getIntExtra("taskPosition", -1);
-            String taskName = intent.getStringExtra("taskName");
-            String taskDescription = intent.getStringExtra("taskDescription");
+        int taskPosition = intent.getIntExtra("taskPosition", -1);
+        String taskName = intent.getStringExtra("taskName");
+        String taskDescription = intent.getStringExtra("taskDescription");
 
-            taskNameEditText.setText(taskName);
-            taskDescriptionEditText.setText(taskDescription);  // Display the description
+        // Load the TaskInputFragment with task data
+        if (savedInstanceState == null) {
+            TaskInputFragment fragment = new TaskInputFragment();
+            Bundle args = new Bundle();
+            args.putInt("taskPosition", taskPosition);
+            args.putString("taskName", taskName);
+            args.putString("taskDescription", taskDescription);
+            fragment.setArguments(args);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, fragment);
+            transaction.commit();
         }
+    }
 
+    @Override
+    public void onSaveTask(int taskPosition, String taskName, String taskDescription) {
+        // Pass the updated task data back to MainActivity
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("taskPosition", taskPosition);
+        resultIntent.putExtra("updatedTaskName", taskName);
+        resultIntent.putExtra("updatedTaskDescription", taskDescription);
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
 
-
-    // Save button click listener
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pass updated task name and description back to MainActivity
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("taskPosition", taskPosition);
-                resultIntent.putExtra("updatedTaskName", taskNameEditText.getText().toString());
-                resultIntent.putExtra("updatedTaskDescription", taskDescriptionEditText.getText().toString());
-                setResult(RESULT_OK, resultIntent);
-                finish();
-            }
-        });
-
-        // Delete button click listener
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("deleteTask", true);
-                resultIntent.putExtra("taskPosition", taskPosition);
-                setResult(RESULT_OK, resultIntent);
-                finish();
-            }
-        });
+    @Override
+    public void onDeleteTask(int taskPosition) {
+        // Pass the delete action back to MainActivity
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("deleteTask", true);
+        resultIntent.putExtra("taskPosition", taskPosition);
+        setResult(RESULT_OK, resultIntent);
+        finish();
     }
 }
