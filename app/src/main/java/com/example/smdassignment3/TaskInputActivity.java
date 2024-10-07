@@ -25,12 +25,11 @@ public class TaskInputActivity extends AppCompatActivity {
                 String taskDescription = taskDescriptionInput.getText().toString().trim();
 
                 if (!taskName.isEmpty()) {
-                    // Pass both task name and description back to MainActivity
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("taskName", taskName);
-                    resultIntent.putExtra("taskDescription", taskDescription);  // Pass the description as well
+                    resultIntent.putExtra("taskDescription", taskDescription);
                     setResult(RESULT_OK, resultIntent);
-                    finish();  // Close the activity
+                    finish();
                 } else {
                     taskNameInput.setError("Task name cannot be empty!");
                 }

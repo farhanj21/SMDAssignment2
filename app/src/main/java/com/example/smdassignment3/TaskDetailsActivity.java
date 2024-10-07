@@ -12,13 +12,11 @@ public class TaskDetailsActivity extends AppCompatActivity implements TaskInputF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
 
-        // Get task details from intent
         Intent intent = getIntent();
         int taskPosition = intent.getIntExtra("taskPosition", -1);
         String taskName = intent.getStringExtra("taskName");
         String taskDescription = intent.getStringExtra("taskDescription");
 
-        // Load the TaskInputFragment with task data
         if (savedInstanceState == null) {
             TaskInputFragment fragment = new TaskInputFragment();
             Bundle args = new Bundle();
@@ -35,7 +33,6 @@ public class TaskDetailsActivity extends AppCompatActivity implements TaskInputF
 
     @Override
     public void onSaveTask(int taskPosition, String taskName, String taskDescription) {
-        // Pass the updated task data back to MainActivity
         Intent resultIntent = new Intent();
         resultIntent.putExtra("taskPosition", taskPosition);
         resultIntent.putExtra("updatedTaskName", taskName);
@@ -46,7 +43,6 @@ public class TaskDetailsActivity extends AppCompatActivity implements TaskInputF
 
     @Override
     public void onDeleteTask(int taskPosition) {
-        // Pass the delete action back to MainActivity
         Intent resultIntent = new Intent();
         resultIntent.putExtra("deleteTask", true);
         resultIntent.putExtra("taskPosition", taskPosition);

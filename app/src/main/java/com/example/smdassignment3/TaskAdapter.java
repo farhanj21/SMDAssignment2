@@ -54,17 +54,14 @@ public class TaskAdapter extends BaseAdapter {
         taskCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             currentTask.setCompleted(isChecked);
             if (isChecked) {
-                // Move task to completed
                 ((MainActivity) context).moveTaskToCompleted(currentTask);
             } else {
-                // Move task back to To-Do list
                 ((MainActivity) context).moveTaskToToDoList(currentTask);
             }
         });
 
 
-        // Handle click on task name (open TaskDetailsActivity)
-        // Handle click on task name (open TaskDetailsActivity)
+        //click on task name (open TaskDetailsActivity)
         taskNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,16 +75,14 @@ public class TaskAdapter extends BaseAdapter {
         });
 
 
-        // Handle long-click on the task for deletion
+        //long-click on the task for deletion
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                // Show a confirmation dialog to delete the task
                 new AlertDialog.Builder(context)
                         .setTitle("Delete Task")
                         .setMessage("Are you sure you want to delete this task?")
                         .setPositiveButton("Yes", (dialog, which) -> {
-                            // Remove the task from the list
                             taskList.remove(position);
                             notifyDataSetChanged();  // Refresh the list
                             Toast.makeText(context, "Task deleted", Toast.LENGTH_SHORT).show();

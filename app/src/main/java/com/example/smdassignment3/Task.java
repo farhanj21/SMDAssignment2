@@ -2,7 +2,7 @@ package com.example.smdassignment3;
 
 public class Task {
     private String taskName;
-    private String taskDescription;  // Add description field
+    private String taskDescription;
     private boolean isCompleted;
 
     public Task(String taskName, String taskDescription, boolean isCompleted) {
