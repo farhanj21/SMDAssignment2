@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Two lists: To-Do and Completed Tasks
     private ArrayList<Task> toDoTaskList;
     private ArrayList<Task> completedTaskList;
     private TaskAdapter toDoTaskAdapter;
@@ -41,11 +40,9 @@ public class MainActivity extends AppCompatActivity {
         // Load tasks from SharedPreferences
         loadTasks();
 
-        // Initialize adapters for both lists
         toDoTaskAdapter = new TaskAdapter(this, toDoTaskList);
         completedTaskAdapter = new TaskAdapter(this, completedTaskList);
 
-        // Set adapters for ListViews
         toDoListView.setAdapter(toDoTaskAdapter);
         completedTasksListView.setAdapter(completedTaskAdapter);
 
@@ -54,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TaskInputActivity.class);
-                startActivityForResult(intent, 1);  // Open TaskInputActivity for result (requestCode 1)
+                startActivityForResult(intent, 1);
             }
         });
 
-        // Add long click listener for deleting tasks in the To-Do list
+        // long click listener for deleting tasks in the To-Do list
         toDoListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Add long click listener for deleting tasks in the Completed tasks list
+        // long click listener for deleting tasks in the Completed tasks list
         completedTasksListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Show a confirmation dialog before deleting a task
+    // confirmation dialog before deleting a task
     private void showDeleteConfirmationDialog(final int position, final boolean isToDoTask) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete Task")
@@ -85,53 +82,47 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (isToDoTask) {
-                            // Remove the task from To-Do List
                             toDoTaskList.remove(position);
                             toDoTaskAdapter.notifyDataSetChanged();
                         } else {
-                            // Remove the task from Completed List
                             completedTaskList.remove(position);
                             completedTaskAdapter.notifyDataSetChanged();
                         }
-                        saveTasks();  // Save updated task list
+                        saveTasks();
                     }
                 })
-                .setNegativeButton("No", null)  // Do nothing on "No"
+                .setNegativeButton("No", null)
                 .show();
     }
 
-    // Handle results from TaskInputActivity and TaskDetailsActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && data != null) {
-            if (requestCode == 1) {  // Handle result from TaskInputActivity (new task)
+            if (requestCode == 1) {
                 String taskName = data.getStringExtra("taskName");
-                String taskDescription = data.getStringExtra("taskDescription");  // Retrieve the description
+                String taskDescription = data.getStringExtra("taskDescription");
 
                 if (taskName != null && !taskName.trim().isEmpty()) {
-                    // Add the new task to the To-Do List (incomplete)
-                    Task newTask = new Task(taskName, taskDescription, false);  // False means not completed
+                    Task newTask = new Task(taskName, taskDescription, false);
                     toDoTaskList.add(newTask);
-                    toDoTaskAdapter.notifyDataSetChanged();  // Refresh To-Do List
-                    saveTasks();  // Save tasks after adding a new one
+                    toDoTaskAdapter.notifyDataSetChanged();
+                    saveTasks();
                 }
-            } else if (requestCode == 2) {  // Handle result from TaskDetailsActivity (edit or delete)
+            } else if (requestCode == 2) {
                 int taskPosition = data.getIntExtra("taskPosition", -1);
 
                 if (data.getBooleanExtra("deleteTask", false)) {
-                    // Delete the task
                     if (taskPosition != -1) {
-                        Task task = getTaskFromLists(taskPosition);  // Fetch task from either list
+                        Task task = getTaskFromLists(taskPosition);
                         toDoTaskList.remove(task);
                         completedTaskList.remove(task);
                         toDoTaskAdapter.notifyDataSetChanged();
-                        completedTaskAdapter.notifyDataSetChanged();  // Refresh both lists
-                        saveTasks();  // Save tasks after deletion
+                        completedTaskAdapter.notifyDataSetChanged();
+                        saveTasks();
                     }
                 } else {
-                    // Update the task
                     String updatedTaskName = data.getStringExtra("updatedTaskName");
                     String updatedTaskDescription = data.getStringExtra("updatedTaskDescription");
 
@@ -141,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
                             task.setTaskName(updatedTaskName);
                             task.setTaskDescription(updatedTaskDescription);
                             toDoTaskAdapter.notifyDataSetChanged();
-                            completedTaskAdapter.notifyDataSetChanged();  // Refresh both lists
-                            saveTasks();  // Save tasks after editing
+                            completedTaskAdapter.notifyDataSetChanged();
+                            saveTasks();
                         }
                     }
                 }
@@ -153,21 +144,21 @@ public class MainActivity extends AppCompatActivity {
     // Move task to Completed list when checkbox is clicked
     public void moveTaskToCompleted(Task task) {
         toDoTaskList.remove(task);
-        task.setCompleted(true);  // Mark task as completed
+        task.setCompleted(true);
         completedTaskList.add(task);
         toDoTaskAdapter.notifyDataSetChanged();
         completedTaskAdapter.notifyDataSetChanged();
-        saveTasks();  // Save tasks after moving
+        saveTasks();
     }
 
     // Move task back to To-Do list when checkbox is unchecked
     public void moveTaskToToDoList(Task task) {
         completedTaskList.remove(task);
-        task.setCompleted(false);  // Mark task as incomplete
+        task.setCompleted(false);
         toDoTaskList.add(task);
         toDoTaskAdapter.notifyDataSetChanged();
         completedTaskAdapter.notifyDataSetChanged();
-        saveTasks();  // Save tasks after moving
+        saveTasks();
     }
 
     // Save tasks to SharedPreferences when the activity is paused
@@ -180,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
     // Convert the task lists to JSON and save in SharedPreferences
     private void saveTasks() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String toDoJson = gson.toJson(toDoTaskList);  // Convert To-Do list to JSON
-        String completedJson = gson.toJson(completedTaskList);  // Convert Completed list to JSON
+        String toDoJson = gson.toJson(toDoTaskList);
+        String completedJson = gson.toJson(completedTaskList);
         editor.putString("to_do_task_list", toDoJson);
         editor.putString("completed_task_list", completedJson);
-        editor.apply();  // Save both lists in SharedPreferences
+        editor.apply();
     }
 
     // Load tasks from SharedPreferences
@@ -197,21 +188,19 @@ public class MainActivity extends AppCompatActivity {
         completedTaskList = gson.fromJson(completedJson, type);
 
         if (toDoTaskList == null) {
-            toDoTaskList = new ArrayList<>();  // If no tasks were saved, initialize the list
+            toDoTaskList = new ArrayList<>();
         }
         if (completedTaskList == null) {
-            completedTaskList = new ArrayList<>();  // If no tasks were saved, initialize the list
+            completedTaskList = new ArrayList<>();
         }
     }
 
-    // Helper method to retrieve a task from either the To-Do or Completed lists
     private Task getTaskFromLists(int taskPosition) {
-        // Try to find the task in both lists
         if (taskPosition < toDoTaskList.size()) {
             return toDoTaskList.get(taskPosition);
         } else if (taskPosition - toDoTaskList.size() < completedTaskList.size()) {
             return completedTaskList.get(taskPosition - toDoTaskList.size());
         }
-        return null;  // Task not found in either list
+        return null;
     }
 }

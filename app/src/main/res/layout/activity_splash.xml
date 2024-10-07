@@ -8,28 +8,28 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/padding200"
+        android:layout_height="@dimen/padding200"
         android:src="@drawable/logo"
-        android:contentDescription="App Logo"
+        android:contentDescription="@string/logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="@dimen/padding16"
+        android:layout_marginBottom="@dimen/padding16"/>
 
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Farhan's To Do List"
-        android:textSize="24sp"
+        android:text="@string/splashText"
+        android:textSize="@dimen/sp24"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="@dimen/padding16"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

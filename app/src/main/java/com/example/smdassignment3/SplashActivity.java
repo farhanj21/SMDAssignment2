@@ -50,10 +50,9 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                // When the scale animation ends, start MainActivity using StartActivityForResult
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivityForResult(intent, MAIN_ACTIVITY_REQUEST_CODE);
-                finish();  // Finish the SplashActivity
+                finish();
             }
 
             @Override
@@ -64,6 +63,5 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Handle any results returned from MainActivity here if needed
     }
 }

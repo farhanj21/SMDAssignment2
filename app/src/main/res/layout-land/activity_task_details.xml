@@ -4,93 +4,93 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp">
+    android:padding="@dimen/padding16">
 
     <!-- Name Header -->
     <TextView
         android:id="@+id/nameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/nameHeader"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="@dimen/sp18"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="@dimen/padding8"/>
 
     <!-- Task Name Input -->
     <EditText
         android:id="@+id/taskNameEditText"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/padding0"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="@dimen/padding10"
         android:background="@drawable/round_edittext"
         android:textColor="@color/black"
-        android:hint="Enter task name"
+        android:hint="@string/nameHint"
         app:layout_constraintTop_toBottomOf="@id/nameHeader"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"/>
+        android:layout_marginBottom="@dimen/padding16"
+        android:textSize="@dimen/sp16"/>
 
     <!-- Description Header -->
     <TextView
         android:id="@+id/descriptionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="@string/descriptionHeader"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="@dimen/sp18"
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/taskNameEditText"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginTop="@dimen/padding16"
+        android:layout_marginBottom="@dimen/padding8"/>
 
     <!-- Task Description Input -->
     <EditText
         android:id="@+id/taskDescriptionEditText"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/padding0"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="@dimen/padding10"
         android:background="@drawable/round_edittext"
         android:textColor="@color/black"
-        android:hint="Enter task description"
+        android:hint="@string/descHint"
         app:layout_constraintTop_toBottomOf="@id/descriptionHeader"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="16dp"
-        android:textSize="16sp"/>
+        android:layout_marginBottom="@dimen/padding16"
+        android:textSize="@dimen/sp16"/>
 
     <!-- LinearLayout to align buttons horizontally -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="@dimen/padding0"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/taskDescriptionEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="@dimen/padding16">
 
         <!-- Save Button -->
         <Button
             android:id="@+id/saveButton"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/padding0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Save"
+            android:text="@string/saveBtn"
             android:backgroundTint="@color/green"
             android:textColor="@color/black"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="@dimen/padding8"/>
 
         <!-- Delete Button -->
         <Button
             android:id="@+id/deleteButton"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/padding0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete"
+            android:text="@string/delBtn"
             android:backgroundTint="@color/red"
             android:textColor="@color/black"/>
     </LinearLayout>

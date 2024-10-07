@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="@dimen/padding16"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="@dimen/sp18"/>
 
         <CheckBox
             android:id="@+id/taskCheckBox"

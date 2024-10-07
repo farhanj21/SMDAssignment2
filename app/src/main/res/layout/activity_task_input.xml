@@ -7,44 +7,44 @@
 
     <EditText
         android:id="@+id/taskName"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/padding0"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:hint="Enter task name"
+        android:padding="@dimen/padding10"
+        android:hint="@string/nameHint"
         android:background="@drawable/round_edittext"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp"
-        android:textSize="16sp"
+        android:layout_margin="@dimen/padding16"
+        android:textSize="@dimen/sp16"
         />
 
     <EditText
         android:id="@+id/taskDescription"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/padding0"
         android:layout_height="wrap_content"
-        android:hint="Enter task description"
-        android:padding="10dp"
+        android:hint="@string/descHint"
+        android:padding="@dimen/padding10"
         android:background="@drawable/round_edittext"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/taskName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp"
-        android:textSize="16sp" />
+        android:layout_margin="@dimen/padding16"
+        android:textSize="@dimen/sp16" />
 
     <Button
         android:id="@+id/btnSaveTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/saveBtn"
         android:textColor="@color/black"
         android:backgroundTint="@color/green"
         app:layout_constraintTop_toBottomOf="@id/taskDescription"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp" />
+        android:layout_margin="@dimen/padding16" />
 </androidx.constraintlayout.widget.ConstraintLayout>
