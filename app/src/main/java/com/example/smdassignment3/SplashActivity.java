@@ -35,7 +35,6 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                // Start scale animation after translation
                 logo.startAnimation(scaleAnim);
                 heading.startAnimation(scaleAnim);
             }

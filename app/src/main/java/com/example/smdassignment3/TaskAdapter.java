@@ -61,11 +61,10 @@ public class TaskAdapter extends BaseAdapter {
         });
 
 
-        //click on task name (open TaskDetailsActivity)
+        // click on task name to open TaskDetailsActivity
         taskNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navigate to TaskDetailsActivity
                 Intent intent = new Intent(context, TaskDetailsActivity.class);
                 intent.putExtra("taskPosition", position);
                 intent.putExtra("taskName", currentTask.getTaskName());
@@ -75,7 +74,7 @@ public class TaskAdapter extends BaseAdapter {
         });
 
 
-        //long-click on the task for deletion
+        // long-click on the task for deletion
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -84,7 +83,7 @@ public class TaskAdapter extends BaseAdapter {
                         .setMessage("Are you sure you want to delete this task?")
                         .setPositiveButton("Yes", (dialog, which) -> {
                             taskList.remove(position);
-                            notifyDataSetChanged();  // Refresh the list
+                            notifyDataSetChanged();
                             Toast.makeText(context, "Task deleted", Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton("No", null)

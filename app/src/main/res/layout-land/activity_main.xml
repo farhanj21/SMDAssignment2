@@ -4,33 +4,33 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/padding16">
+    android:padding="@dimen/pad16">
 
     <!-- To-Do List Header -->
     <TextView
         android:id="@+id/toDoListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/toDoHeader"
+        android:text="@string/todoheader"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:background="@color/red"
-        android:padding="@dimen/padding8"
+        android:padding="@dimen/pad8"
         android:gravity="center"
         android:textSize="@dimen/sp22"
-        android:layout_marginBottom="@dimen/padding16"/>
+        android:layout_marginBottom="@dimen/pad16"/>
 
     <!-- To-Do List -->
     <ListView
         android:id="@+id/toDoListView"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/pad0"
         android:layout_height="wrap_content"
         android:divider="@color/black"
-        android:dividerHeight="@dimen/padding2"
+        android:dividerHeight="@dimen/pad2"
         app:layout_constraintTop_toBottomOf="@id/toDoListHeader"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="@dimen/padding24"/>
+        android:layout_marginBottom="@dimen/pad24"/>
 
     <!-- Completed Tasks Header -->
     <TextView
@@ -41,25 +41,25 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:background="@color/green"
-        android:padding="@dimen/padding8"
+        android:padding="@dimen/pad8"
         android:gravity="center"
         android:textSize="@dimen/sp22"
         app:layout_constraintTop_toBottomOf="@id/toDoListView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="@dimen/padding16"/>
+        android:layout_marginBottom="@dimen/pad16"/>
 
     <!-- Completed Tasks List -->
     <ListView
         android:id="@+id/completedTasksListView"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/pad0"
         android:layout_height="wrap_content"
         android:divider="@color/black"
-        android:dividerHeight="@dimen/padding2"
+        android:dividerHeight="@dimen/pad2"
         app:layout_constraintTop_toBottomOf="@id/completedTasksHeader"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="@dimen/padding24"/>
+        android:layout_marginBottom="@dimen/pad24"/>
 
     <!-- Floating Action Button to Add Tasks -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -67,10 +67,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/add"
-        android:text="@string/fab"
+        android:contentDescription="@string/addTask"
         android:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="@dimen/padding16"/>
+        android:layout_margin="@dimen/pad16"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

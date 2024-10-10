@@ -1,21 +1,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding16"
+    android:padding="@dimen/pad16"
     android:background="@color/background_color">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/padding16"
-        tools:ignore="MissingConstraints">
+        android:padding="@dimen/pad16">
 
         <TextView
             android:id="@+id/task_item_text"
-            android:layout_width="@dimen/padding0"
+            android:layout_width="@dimen/pad0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
@@ -23,12 +21,12 @@
 
         <TextView
             android:id="@+id/task_description_text"
-            android:layout_width="@dimen/padding0"
+            android:layout_width="@dimen/pad0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:paddingStart="@dimen/padding16"/>
+            android:textSize="@dimen/sp16"
+            android:paddingStart="@dimen/pad16"/>
 
         <CheckBox
             android:id="@+id/taskCheckBox"

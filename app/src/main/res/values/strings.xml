@@ -1,14 +1,14 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">SMD Assignment 2</string>
-    <string name="toDoHeader">To-Do List</string>
+    <string name="todoheader">To-Do List</string>
     <string name="completedHeader">Completed Tasks</string>
-    <string name="fab">Add Task</string>
-    <string name="logo">App Logo</string>
-    <string name="splashText" tools:ignore="StringEscaping">Welcome to Farhan's To Do List</string>
-    <string name="nameHeader">Name</string>
+    <string name="addTask">Add Task</string>
+    <string name="splash">Welcome to Farhan\'s To Do List</string>
+    <string name="nameField">Name</string>
     <string name="nameHint">Enter task name</string>
-    <string name="descriptionHeader">Description</string>
+    <string name="desc">Description</string>
     <string name="descHint">Enter task description</string>
-    <string name="saveBtn">Save</string>
-    <string name="delBtn">Delete</string>
+    <string name="save">Save</string>
+    <string name="del">Delete</string>
+
 </resources>

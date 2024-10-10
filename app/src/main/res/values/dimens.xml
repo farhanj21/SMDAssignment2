@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pad5">5dp</dimen>
+    <dimen name="pad8">8dp</dimen>
+    <dimen name="pad20">20dp</dimen>
+    <dimen name="pad24">24dp</dimen>
+    <dimen name="pad200">200dp</dimen>
+    <dimen name="pad250">250dp</dimen>
+    <dimen name="pad1">1dp</dimen>
+    <dimen name="pad0">0dp</dimen>
+    <dimen name="pad2">2dp</dimen>
+    <dimen name="pad16">16dp</dimen>
+    <dimen name="pad10">10dp</dimen>
+    <dimen name="sp20">20sp</dimen>
+    <dimen name="sp18">18sp</dimen>
+    <dimen name="sp16">16sp</dimen>
+    <dimen name="sp22">22sp</dimen>
+    <dimen name="sp24">24sp</dimen>
+    <dimen name="sp26">26sp</dimen>
+
+</resources>

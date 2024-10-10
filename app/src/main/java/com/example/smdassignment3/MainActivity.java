@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Two lists: To-Do and Completed Tasks
     private ArrayList<Task> toDoTaskList;
     private ArrayList<Task> completedTaskList;
     private TaskAdapter toDoTaskAdapter;
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         ListView completedTasksListView = findViewById(R.id.completedTasksListView);
         FloatingActionButton fabAddTask = findViewById(R.id.fabAddTask);
 
-        // Load tasks from SharedPreferences
         loadTasks();
 
         toDoTaskAdapter = new TaskAdapter(this, toDoTaskList);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         toDoListView.setAdapter(toDoTaskAdapter);
         completedTasksListView.setAdapter(completedTaskAdapter);
 
-        // OnClickListener for FAB to open TaskInputActivity for result (to add new task)
+        // FAB to open TaskInputActivity for to add new task
         fabAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,17 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // long click listener for deleting tasks in the Completed tasks list
-        completedTasksListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showDeleteConfirmationDialog(position, false);
-                return true;
-            }
-        });
     }
-
-    // confirmation dialog before deleting a task
     private void showDeleteConfirmationDialog(final int position, final boolean isToDoTask) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete Task")
@@ -100,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && data != null) {
-            if (requestCode == 1) {
+            if (requestCode == 1) {  // Handle result from TaskInputActivity (new task)
                 String taskName = data.getStringExtra("taskName");
                 String taskDescription = data.getStringExtra("taskDescription");
 
@@ -110,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     toDoTaskAdapter.notifyDataSetChanged();
                     saveTasks();
                 }
-            } else if (requestCode == 2) {
+            } else if (requestCode == 2) {  // Handle result from TaskDetailsActivity (edit or delete)
                 int taskPosition = data.getIntExtra("taskPosition", -1);
 
                 if (data.getBooleanExtra("deleteTask", false)) {
@@ -195,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Helper method to retrieve a task from either the To-Do or Completed lists
     private Task getTaskFromLists(int taskPosition) {
         if (taskPosition < toDoTaskList.size()) {
             return toDoTaskList.get(taskPosition);
